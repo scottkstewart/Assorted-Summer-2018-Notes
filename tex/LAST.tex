@@ -1,0 +1,181 @@
+\documentclass{report}
+\usepackage{../style}
+
+\begin{document}
+\part{Logic and Set Theory}
+\chapter{Set Theory}
+\section{First Axioms} 
+
+
+\begin{definition}
+  Define $A \subseteq B$ to mean every element of $A$ is an element of $B$. Equivalently, $\forall x\left( \left( x \in A \right) \rightarrow \left( x \in B \right) \right)$. If $A \subseteq$, $A$ is a subset of $B$.
+\end{definition}
+
+\begin{axiom}
+  {\normalfont (Extensionality).} Two sets are equal iff they have the same elements. Equivalently, 
+  
+ \noindent $\forall S \forall T \left( \left( S = T \right) \leftrightarrow \forall x \left( \left( x \in S \right) \leftrightarrow \left( x \in T \right) \right) \right)$.
+\end{axiom}
+
+\begin{axiom}
+  {\normalfont (Separation).} For every mathematical property $\varphi(x)$ and every set $S$, there exists a set $T$ such that for all $x$, we have $x \in T$ iff $x \in S$ and $\varphi(x)$ holds.
+\end{axiom}
+
+\begin{definition}
+  A universe, or universal set, is a set that contains every set as an element. No such set exists in $ZFC$, because $AOS$ and Russel's paradox $R = \{ x \in U \mid x \notin x\}$ leads to contradiction.
+\end{definition}
+
+\begin{axiom}
+  {\normalfont (Empty Set).} There is a set with no elements, $\emptyset$.
+\end{axiom}
+
+\begin{axiom}
+  {\normalfont (Pairing).} For all sets $a$ and $b$, there exists a set $S$ such that $a \in S$ and $b \in S$.
+\end{axiom}
+
+\begin{axiom}
+  {\normalfont (Union).} For every set $S$, there is a set whose elements are exactly the elements of the elements of $S$. We denote it by $\bigcup\limits_{x \in S} x$.
+\end{axiom}
+
+\begin{axiom}
+  {\normalfont (Power Set).} The power set $\SP(S)$ of a set $S$ is the set of all subsets of $S$. Every set has a power set.
+\end{axiom}
+
+\begin{definition}
+  The ordered pair $\left( x,y \right)$ is defined to be $\{\{x\},\{x,y\}\}$.
+\end{definition}
+
+\begin{lemma}
+  For all $u,v,x,y$ we have $(u,v) = (x,y)$ iff $u=x$ and $v=y$.
+\end{lemma}
+
+\begin{definition}
+  The Cartesian product $S \times T = \{ (s,t) \in \SP \left( \SP \left( S \cup T \right) \right) \mid s \in S$ and $t \in T \}$.
+\end{definition}
+
+\begin{definition}
+  A relation between $S$ and $T$ is a subset of $S \times T$. A function $f:s \rightarrow T$ is a subset $f \subseteq S \times T$ such that for each $s \in S$, there exists a unique $t \in T$ with $(s,t) \in f$. We write $\SF \left( S,T \right)$ for the set of all functions from $S$ and $T$. We call $S$ the domain and $T$ the codomain. The identity function from $S$ to $S$ is the function $\{\left( s,s' \right) \in S \times S \mid s = s' \}$.
+\end{definition}
+
+\begin{definition}
+  A function $f:S \rightarrow T$ is injective if for all $s_1,s_2 \in S$, the equation $f(s_1) = f(s_2)$ implies $s_1 = s_2$. It is surjective if for every $t \in T$ there exists an $s \in S$ such that $f(s) = t$; equivalently, it is surjective if $f[S] = T$.
+\end{definition}
+
+\newpage
+\section{The Natural Numbers}
+\begin{definition} 
+  The successor of a set $x$ is the set $x^+ = x \cup \{x\}$. A set is inductive if it contains $\emptyset$ and it contains $x^+$ whenever it contains $x$.
+\end{definition}
+
+\begin{axiom}
+  {\normalfont (Infinity).} There exists an inductive set.
+\end{axiom}
+
+\begin{theorem}
+  An inductive set is minimal if it is a subset of every inductive set. There exists a minimal inductive set.
+\end{theorem}
+
+\begin{definition}
+  The set $\omega$ of natural numbers is the minimal inductive set.
+\end{definition}
+
+\begin{lemma}
+  Every number is either 0 or the successor of a natural number.
+\end{lemma}
+
+\begin{definition}
+  A set is finite if there is a bijection from it to an element of $\omega$ and infinite  otherwise. If $n \in \omega$, then a set has size (or cardinality) $n$ if there is a bijection between it and the set $n$.
+\end{definition}
+
+\begin{proposition}
+  There is no bijection between distinct elements of $\omega$.
+\end{proposition}
+
+\begin{proposition}
+  The union of two finite sets is always finite.
+\end{proposition}
+
+\begin{proposition}
+  A subset of a finite set is always finite.
+\end{proposition}
+
+ \newpage
+\section{Partially, Totally, and Well-Ordered Sets}
+\begin{definition}
+  A partially ordered set (or poset) is a set $S$ with a relation $R \subseteq S \times S$, written $x \leq y$ iff $(x,y) \in R$, which is reflexive, antisymmetric ($x \leq y$ and $y \leq x$ imply $x = y$), and transitive. A strict partial ordering doesn't include equality. 
+\end{definition}
+
+\begin{definition}
+ Two elements in a poset are comparable if one is greater than or equal to the other, and incomparable otherwise. The poset, or any subset, is totally ordered if every pair of elements is comparable. A totally ordered subset of a poset is sometimes called a chain.
+\end{definition}
+
+\begin{definition}
+  An upper bound for a subset $S$ of a poset is an element $x$ in the poset such that $x \geq y$ for all $y \in S$. It is the least upper bound for $S$ if $x \leq x'$ for every upper bound $x'$ for $S$. (Greatest) lower bound is defined similarly.
+\end{definition}
+
+\begin{theorem}
+  {\normalfont (Knaster-Tarski fixed point theorem).} Let $P$ be a poset in which every subset has a least upper bound, and let $f:P \rightarrow P$ be an order-preserving map (i.e., if $x \leq y$ then $f(x) \leq f(y)$). Then f has a fixed point, i.e. there exists $x \in P$ such that $f(x) = x$.
+\end{theorem}
+
+\begin{theorem}
+  {\normalfont (Cantor-Schr{\"o}der-Bernstein).} If $S$ and $T$ are sets for which there are injective maps from $s$ to $T$ and from $T$ to $S$, then there is a bijection between $S$ and $T$.
+\end{theorem}
+
+\begin{definition}
+  If $S$ is a subset of a poset, then $x \in S$ is a minimal element of $S$ if there is no $y \in S$ with $y < x$ (and a maximal element is defined similarly). A well ordered set is a totally ordered set in which every non-empty subset has a minimal element.
+\end{definition}
+
+\newpage
+\section{Ordinals and their Basic Properties}
+\begin{definition}
+  An ordinal is a set $\alpha$ such that (1) $\alpha$ is strictly well-ordered under $\in$, and (2) $\alpha$ is transitive; i.e. for all $x \in \alpha$, we have $x \subseteq \alpha$.
+\end{definition}
+
+\begin{proposition}
+  Every element of an ordinal is an ordinal.
+\end{proposition}
+
+\begin{definition}
+  For ordinals $\alpha$ and $\beta$, we define $\alpha < \beta$ to mean $\alpha \in \beta$.
+\end{definition}
+
+\begin{lemma}
+  No ordinal $\alpha$ satisfies $\alpha \in \alpha$.
+\end{lemma}
+
+\begin{axiom}
+  {\normalfont (Foundation).} Every non-empty set contains an element disjoint from it. (This implies total ordering under $\in$ is well-ordering under $\in$). 
+\end{axiom}
+
+\begin{corollary}
+  No set is an element of itself.
+\end{corollary}
+
+\begin{corollary}
+  There do not exist sets $x$ and $y$ such that $x \in y$ and $y \in x$.
+\end{corollary}
+
+\begin{corollary}
+  There do not exist sets $S_0,S_1,S_2,\dots$ such that $S_0 \ni S_1 \ni S_2 \ni \dots$. More formally, there does not exist a set $R$ and a function $f:\omega \rightarrow R$ such that $f(i^+) \in f(i)$ for all $i \in \omega$.
+\end{corollary}
+
+\begin{definition}
+  The successor of an ordinal $\alpha$ is $\alpha^+ = \alpha \cup \{ \alpha \}$.
+\end{definition}
+
+\begin{definition}
+  The empty set $\emptyset$ is an ordinal, and for each ordinal $\alpha$, its successor $\alpha^+$ is an ordinal.
+\end{definition}
+
+\begin{corollary}
+  Every element of $\omega$ is an ordinal.
+\end{corollary}
+
+\begin{definition}
+  A limit ordinal is an ordinal that is not the successor of any ordinal.
+\end{definition}
+
+\begin{lemma}
+   For all ordinals $\alpha$ and $\beta$, their intersection $\alpha \cap \beta$ is an ordinal.
+\end{lemma}
+\end{document}
