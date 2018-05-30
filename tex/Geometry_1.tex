@@ -1,0 +1,50 @@
+\documentclass{report}
+\usepackage{../style}
+ 
+\begin{document}
+Note that the information contained in the appendix to Artin's 18.721 notes is partially redundant; rather than give a full picture of the information as background did for other subjects, this chapter aims to list only new information.
+
+\section{Rings}
+A ring that contains the field $\CC$ as a subring will be called an \emph{algebra}. 
+A \emph{homomorphism} of algebras is a ring homomorphism that restricts to the identity on the complex numbers.
+We will call a finitely generated algebra \emph{finite-type}, and we know these to be Noetherian by the Hilbert Basis Theorem.
+
+If $I$ and $J$ are ideals, the intersection $I \cap J$ is an ideal.
+The \emph{product ideal} $IJ$ is the ideal whose elements are finite sums of products $\sum a_\nu b\nu$ with $a_\nu$ in $I$ and $b_\nu$ in $J$.
+The intersection $I \cap J$ contains the product $IJ$.\footnote{This is easy to verify; the absorbing property and closure under addition works simultaneously on both ideals.}
+
+\begin{lemma}
+  Let $P$ be an ideal of a ring $R$, not the unit ideal.
+  The following are equivalent:
+  \begin{enumerate}[label=(\textbf{\roman*})]
+    \item $R/P$ is an integral domain.
+    \item If $a$ and $b$ are elements of $R$ and if $ab \in P$, then $a \in P$ or $b \in P$.
+    \item If $A$ and $B$ are ideals of $R$ and if $AB \subset P$, then $A \subset P$ or $B \subset P$.\qed
+  \end{enumerate}
+\end{lemma}
+
+Ideals $I_1,\dots,I_k$ of a ring $R$ are \emph{comaximal} if the sub $I_i + I_j$ is the unit ideal for all $i \neq j$.
+This will be true iff no two of the ideas are contained in a maximal ideal of $R$.
+\begin{theorem}
+  {\normalfont (Chinese Remainder Theorem)} Let $I_1,\dots,I_k$ be comaximal ideals of $R$.
+  \begin{enumerate}[label=(\textbf{\roman*})]
+    \item The product ideal $J = I_1\dots I_k$ is equal to the intersection $I_1 \cap \dots \cap I_k$.
+    \item The map $R \rightarrow R/I_1 \times \dots \times R/I_k$ that sends an element $a$ or $R$ to the vector of its residues is a surjective homomorphism whose kernel is $J$.\footnote{The word ``vector'' appears in Artin's notes here. It seems not very difficult to justify this as an element of an obvious $R$-modules, but I'm not sure that the codomain must be a vector space.}
+    \item Let $M$ be an $R$-module. The canonical homomorphism $M \rightarrow M/I_1M \times \dots \times M/I_kM$ is surjective and its kernel is $JM$.
+  \end{enumerate}
+\end{theorem}
+\begin{corollary}
+  An algebra $A$ that is a complex vector space of dimension $d$ contains at most $d$ maximal ideals.
+\end{corollary}
+\begin{proof}
+  Distinct maximal ideals are comaximal.
+  If $m_1,\dots,m_k$ are distinct maximal ideals of $A$, the map $A \rightarrow A/m_1 \times \dots \times A/m_k$ is a surjective linear transformation, so $A$ has at least dimension $k$.
+\end{proof}
+
+A \emph{presentation} of a finite-type algebra $A$ is an isomorphism $\CC[\underline x]/I \equiv A$, where $I$ is an ideal in a polynomial ring.
+We often write $A = \CC[\underline x]/(\underline f)$, but this is often hard to write explicitly.
+
+For localization, we will write a multiplicatively closed subset of an integral domain $A$ (which contains 1 and not 0) as a \emph{multiplicative system} $S$.
+We will call the localization at $S$ as the ring of \emph{S-fractions} $AS^{-1}$.
+
+\end{document}

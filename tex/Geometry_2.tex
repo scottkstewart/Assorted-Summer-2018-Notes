@@ -1,0 +1,51 @@
+\documentclass{report}
+\usepackage{../style}
+ 
+\begin{document}
+\section{The Affine Plane}
+The $n$-dimensional \emph{affine space} $\AA^n$ is the space of $n$-tuples of complex numbers.\footnote{I'm not sure why the notational difference from $\CC^n$ is necessary.
+In Fulton, $\AA^n(k) = k^n$ for any field $k$}.
+We call $\AA^2$ the affine plane.
+
+If $f(x_1,x_2)$ is an irreducible complex polynomial in two variables, the \emph{locus of zeros} of $f$ is called a \emph{plane curve}, or an \emph{affine plane curve}.
+Using vector notation $x = \prn{x_1,x_2}$, 
+\[ X = \cbr{x \mid f(x) = 0}. \]
+The degree of curve $X$ is the degree of its irreducible defining polynomial.
+
+Note, the word curve here is derived from the \emph{algebraic} dimension of one: the only proper subsets of a plane curve that can be defined by polynomial equations are finite sets.
+We will use words that sort of generalize geometric intuition from the reals to affine space over other fields.
+
+We will inspect the projection of a plane curve $X$ by inspecting its projection to the affine line.
+To do this, write its defining polynomial $f$ as a polynomial in $x_2$ whose coefficients are polynomials in $x_1$:
+\[
+  f(x_1,x_2) = c_0(x_1)x_2^d + c_1(x_1)x_2^{d-1} + \dots + c_d(x_1).
+\]
+Suppose that $f$ isn't a polynomial in $x_1$ alone, so that $d$ is positive.
+The \emph{fibre} of a map $X \rightarrow Z$ over a point $q$ of $Z$ is defined to be the preimage of $q$.
+The fibre of a projection $X \rightarrow \AA^1$ over a point $x_1 = a$ is the set of points $\prn{a,b}$ such that $b$ is a root of the one-variable polynomial
+\[
+  f(a,x_2) = c_0(a)x_2^d + \dots + c_d(a).
+\]
+There will be finitely many points in the fibre, and the fibre won't be empty unless $f(a,x_2)$ is a constant.
+Hence $X$ covers most of the $x_1$-line finitely often.
+
+In order to classify plane curves, we allow linear changes of variable and translations.
+Hence, we can change variables by the following, where $Q$ is an invertible $2 \times 2$ complex matrix and $a$ is a complex translation vector:
+\[ Qx' + a = x. \]
+We change polynomial equations $f(x) = 0$ to $f(Qx' + a) = 0$.
+We also allow scalar multiplication of polynomials.
+Using this, all \emph{lines} (plane curves of degree 1) become equivalent.
+
+An \emph{affine conic} is a plane curve of degree two.
+Every equation $q(x_1,x_2) = 0$ in which $q$ is an irreducible quadratic polynomial is equivalent, by change of coordinates, to one of the following equations:
+\[ x_1^2 - x_2^2 - 1 = 0 \text{   or   } x_1^2 - x_2 = 0. \]
+
+The proof of this is similar to the one used in classifying real conics, and one might call these hyperbola and parabola.
+The complex ellipse $x_1^2 + x_2^2 - 1 = 0$ becomes a hyperbola when one multiplies $x_2$ by $i$.
+
+A surprising fact: there are infinitely many inequivalent cubic curves.
+Cubic polynomials in two variables depend on the coefficients of ten monomials in $x_1,x_2$, and linear operators, translations, and scalar multiplication only give seven parameters to work with, leaving three essential parameters.
+
+\section{The Projective Plane}
+
+\end{document}
