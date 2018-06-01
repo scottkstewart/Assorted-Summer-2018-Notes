@@ -47,5 +47,87 @@ A surprising fact: there are infinitely many inequivalent cubic curves.
 Cubic polynomials in two variables depend on the coefficients of ten monomials in $x_1,x_2$, and linear operators, translations, and scalar multiplication only give seven parameters to work with, leaving three essential parameters.
 
 \section{The Projective Plane}
+The $n$-dimensional \emph{projective space} $\PP^n$ is the set of equivalence classes of \emph{nonzero} vectors $x = \prn{x_0,\dots,x_n}$, with the equivalence relation
+\[
+  \prn{x_0',\dots,x_n'} \sim \prn{x_0,\dots,x_n} \text{\hspace{5pt} if \hspace{5pt}}
+  \prn{x_0',\dots,x_n'} = \prn{\lambda x_0,\dots, \lambda x_n}
+\]
+for some nonzero complex number $\lambda$. 
+The equivalence classes are points of $\PP^n$ and one often refers to a point by a particular vector in its classes.
+There is an obvious bijective correspondence between points of $\PP^n$ and one-dimensional subspaces of $\CC^{n+1}$.
+We will use the words \emph{line} and \emph{plane} as before, referring to one and two-dimensional projective space.
 
+Points of the projective line $\PP^1$ are equivalence classes of nonzero vectors $(x_0,x_1)$.
+If $x_0$ isn't zero, we normalize the first component, otherwise we normalize the second.
+Hence the points are written uniquely as $(1,u)$ for $u \in \CC$ and $(0,1)$;
+the projective line $\PP^1$ can be obtained by adding the last point, a \emph{point at infinity}, to the affine \emph{u}-line $\UU$, which is a complex plane.
+Topologically, the projective line is a 2-sphere.
+
+A \emph{line} $L$ is projective space $\PP^n$ can be described in terms of a pair of distinct points $p$ and $q$, as the set of points $\cbr{rp + sq}$, with $r,s \in \CC^*$.
+The points of this line correspond bijectively to the points of $\PP^1$ by
+\[
+  rp + sq \longleftrightarrow \prn{r,s}.
+\]
+We can also describe a line in the projective plane as the locus of solutions to a homogeneous linear equation
+\[
+  s_0x_0 + s_1x_1 + s_2x_2 = 0.
+\]
+
+\begin{lemma}
+  Two distinct lines in the projective plane have exactly one point in common, and a pair of distinct points is contained in exactly one line.\footnote{The proof for this was omitted.
+  This is clear through the bijective correspondence with subspaces of complex space, as well as intuition from Euclidean geometry.}\qed
+\end{lemma}
+
+We can work similarly with $\PP^2$ as we did with $\PP^1$;
+if $x_0$ is nonzero, we can write 
+\[\prn{x_0,x_1,x_2} \sim \prn{1,u_1,_2} \longleftrightarrow (u_1,u_2).\]
+This gives the affine plane as a subset of $\PP^2$, and we denote this subset by $\UU^0$.
+We say the points of $\UU^0$ (those with $x_0$ nonzero) are the \emph{points at finite distance}, where the \emph{points at infinity} of $\PP^2$ are on the \emph{line at infinity} $L^0$, the locus $\cbr{x_0 = 0}$.
+
+There is an analogous correspondence between the points with $x_1$ or $x_2$ nonzero and an affine plane $\AA^2$ for each.
+We denote the subset $\cbr{x_i \neq 0}$ by $\UU^i$.
+We call the three sets $\UU^0$, $\UU^1$, $\UU^2$ the \emph{standard covering} of $\PP^2$ by three \emph{standard affine open sets}.
+Note: which points of $\PP^2$ depend on which of the standard affine open sets is at finite distance.
+With $(x_0,x_1,x_2)$, Artin may define $\cbr{x_0 \neq 0}$ at finite distance, but for $(x,y,z)$, he may define $\cbr{z \neq 0}$ at finite distance.
+
+The \emph{real projective plane} $\RR \PP^2$ is the set of equivalence classes of nonzero real vectors $(x_0,x_1,x_2)$, the equivalence relation being $(x') \sim (x)$ if $(x') = \lambda(x)$ for some nonzero real number $\lambda$.
+It can be thought of as the space of one-dimensional subspaces of a real vector space of dimension three.
+Let $V$ denote $\RR^3$ and let $U$ be the plane $\cbr{x_0 = 1} \subset V$
+Then $U$ is analogous to the subset $U^0$ of the complex projective plane $\PP^2$.
+
+We can project $V$ from the origin to $U$, sending a point $(x_0,x_1,x_2)$ of $V$ to the point $(1,u_1,u_2)$ with $u_i = x_i/x_0$; then the fibres of this projection are the one-dimensional subspaces of $\RR^3$, the origin omitted.\footnote{This is the ``picture plane'' from art.}
+This projection to $U$ is undefined at the points $(0,x_1,x_2)$; lines through the origin that are orthogonal to the $x_0$ axis don't meet $U$, and they correspond to the points at infinity of $\RR\PP^2$.
+
+An invertible $3 \times 3$ matrix $P$ determines a linear change of coordinates in $\PP^2$;
+\[ Px' = x. \]
+As the next proposition shows, four special points, $e_0 = (1,0,0)^t$, $e_1 = (0,1,0)^t$, $e_2 = (0,0,1)^t$, and $e = (1,1,1)$ determine the coordinates.
+
+\begin{proposition}
+  Let $p_0$, $p_1$, $p_2$, $q$ be four points of $\PP^2$, no three of which lie on a line.
+  There is, up to scalar factor, a unique linear coordinate change $Px' = x$ such that $Pp_i = e+i$ and $Pq = e$.
+\end{proposition}
+\begin{proof}
+  Since $p_0,p_1,p_2$ don't lie on a line, those three vectors are independent, and they span $\CC^3$.
+  Then, $q$ is a combination $c_0p_0 + c_1p_1 + c_2p_2$, and because no three points lie on a line, $c_i$ are nonzero.
+  Then we can scale the vectors (by nature of $\PP^2$) so that $q = p_0 + p_1 + p_2$; then making the $i$th column of $P$ be $p_i$ gives $Pe_i = p_i$ and $Pe = q$; uniqueness up to scaling is clear by inspection.
+\end{proof}
+
+A polynomial $f(x_0,x_1,x_2)$ is \emph{homogeneous of degree $d$} if all monomials that appear with nonzero coefficient have degree $d$.
+A \emph{conic} is the locus of zeros of an irreducible homogeneous quadratic polynomial of three variables, a combination of the six monomials
+\[
+  x_0^2,x_1^2,x_2^2,x_0x_1,x_1x_2,x_00x_2.
+\]
+\begin{proposition}
+  For any conic $C$, there is a choice of coordinates so that $C$ becomes the locus
+  \[ x_0x_1 + x_0x_2 + x_1x_2 = 0. \]
+\end{proposition}
+\begin{proof}
+  Since $C$ isn't a line, it will contain three non-colinear points;
+  change coordinates so that these are $e_0$, $e_1$, and $e_2$.
+  Let $f$ be the quadratic in those coordinates with zero locus $C$.
+  Then $f(1,0,0) = 0$, so the coefficient of $x_0^2$ is zero; similar logic gives zero coefficient for all squared terms.
+  $f$ has the form
+  \[ f = ax_0x_a + bx_0x_2 + cx_1x_2, \]
+  and we may scale the variables to make $a=b=c=1$.
+\end{proof}
 \end{document}

@@ -137,6 +137,233 @@ Sometimes fully specifying the elements of a topology is difficult or annoying--
   By an earlier lemma, it suffices to show that the collection of finite intersections of $\CS$ is a basis.
   Given $x \in X$, it belongs to an element of $\CS$ and hence an element of $\SB$, giving the first condition.
   To show the second condition, let $B_1 = S_1 \cap \dots \cap S_m$ and $B_2 = S_1' \cap \dots \cap S_n'$ be any two elements of $\SB$; then $B_1 \cap B_2 = S_1 \cap \dots \cap S_m \cap S_1' \cap \dots \cap S_n' \in \SB$, making $\SB$ a basis.
+ 
 
-  \section{Basic Examples of Topological Spaces}
+\section{Closed Sets and Limit Points}
+I'll defer talking about particular examples until later.
+Refer to ``Basic Examples of Topological Spaces'' at the end of the chapter for definitions of order, product, subspace topologies, etc.
+First I'll cover closed sets, limit points, and the Hausdorff axiom.
+
+\subsection{Closed Sets}
+We say a subset of a topological space is \emph{closed} if its complement is open.
+\begin{theorem}
+  Let $X$ be a topological space.
+  Then the following conditions hold:
+  \begin{enumerate}[label={(\arabic*)}]
+    \item $\varnothing$ and $X$ are closed.
+    \item Arbitrary intersections of closed sets are closed.
+    \item Finite unions of closed sets are closed.\footnote{Use DeMorgan's Law}\qed
+  \end{enumerate}
+\end{theorem}
+
+Note: while this is rarely done, a collection of closed sets satisfying these theorems can be used to specify a topology rather than open sets.
+
+\begin{theorem}
+  Let $Y$ be a subspace of $X$.
+  Then a set $A$ is closed in $Y$ iff it is the intersection of a closed set of $X$ with $Y$.
+\end{theorem}
+\begin{proof}
+  Suppose that $A = Y \cap C$ for some $C$ which is closed in $X$.
+  Then there exists some $U = X - C$ which is open in $X$, and for which
+  \[
+    U \cap Y = Y - C \cap Y = Y - A
+  \]
+  is open in $Y$, meaning $A$ is closed in $Y$.
+  
+  Conversely, suppose $A$ is closed in $Y$.
+  Then $Y - A$ is open, so there exists an open $U$ such that
+  \[
+    U \cap Y = Y - A
+  \]
+  and $X - U$ is closed in $X$, so that $A = (X - U) \cap Y$, the intersection of $Y$ and a closed set of $X$.\footnote{Ahh this proof is messy as hell, but the idea is there}
+\end{proof}
+
+\begin{theorem}
+  Let $Y$ be a subspace of $X$.
+  If $A$ is closed in $Y$ and $Y$ is closed in $X$, then $A$ is closed in $X$.\footnote{The proof was ``left to the reader,'' but this is an obvious finite intersection on closed sets in $X$ using the previous theorem.}\qed
+\end{theorem}
+
+\subsection{Closure and Interior of a Set}
+We'll talk about the closure and interior, functionally the largest open subset and smallest closed subset.
+\begin{definition}
+  Given a subset $A$ of a topological space $X$, the \emph{interior} of $A$ is the union of all open sets contained in $A$, and the \emph{closure} of $A$ is the intersection of all closed sets containing $A$.
+\end{definition}
+
+Note the following inclusion, with $\Int A = A$ if open and $A = \bar A$ if closed:
+\[
+  \Int A \subset A \subset \bar A.
+\]
+In the situation where $A$ is a subset of $Y$ which is a subspace of $X$, we'll use care, and generally define the closure $\bar A$ as the closure of $A$ in $Y$.
+More on this follows:
+
+\begin{theorem}
+  Let $Y$ be a subspace of $X$,
+  let $A$ be a subset of $Y$,
+  and let $\bar A$ denote the closure of $A$ in $X$.
+  Then the closure of $A$ in $Y$ equals $\bar A \cap Y$.
+\end{theorem}
+\begin{proof}
+  Denote the closure of $A$ in $Y$ as $B$.
+  Since $\bar{A}$ is closed, $\bar{A} \cap Y$ is closed and contains $A$;
+  then, $B \subset \bar A \cap Y$ by property of the intersection.
+
+  On the other hand, since $B$ is closed in $Y$, $B = C \cap Y$ for some $C$ closed in $X$;
+  $C$ is a closed set of $C$ containing $A$;
+  then $\bar{A} \subset C$, so $(\bar A \cap Y) \subset (C \cap Y) = B$
+\end{proof}
+
+We'll write that a set $A$ \emph{intersects} a set $B$ if the intersection $A \cap B$ is nonempty.
+
+\begin{theorem}
+  Let $A$ be a subset of the topological space $X$.
+  \begin{enumerate}[label={(\alph*)}]
+    \item Then $x \in \bar A$ iff every open set $U$ containing $x$ intersects $A$.
+    \item Supposing the topology of $X$ is given by a basis, then $x \in \bar A$ iff every basis element $B$ containing $x$ intersects $A$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We'll prove (a) using contraposition;
+  if $x \notin \bar{A}$, then $U = X-\bar{A}$ is an open set in $X$ which contains $x$ and doesn't intersect $A$.
+  If $U$ contains $x$ and doesn't intersect $\bar{A}$, then $X - U$ is a closed set containing $A$; then $X - U$ must contain $\bar A$, so $x \notin \bar A$.
+
+  The rest follows from this.
+  If not every basis element containing $x$ intersects $A$, then by (a), $x \notin \bar A$.
+  If every basis element containing $x$ intersects $\bar A$, then so does every open set containing $x$ by definition of bases (each open set containing $x$ contains a basis element containing $x$).
+\end{proof}
+
+We'll write ``$U$ is an open set containing $x$'' as ``$U$ is a \emph{neighborhood} of $x$.''
+Using this, we can rewrite the previous theorem as ``if $A$ is a subset of a topological space $X$, then $x \in \bar{A}$ iff every neighborhood of $X$ intersects $A$.''
+\section{Basic Examples of Topological Spaces}
+\subsection{The Order Topology}
+If $X$ is a set with a simple order $<$, we can define a standard topology for $X$ using the order relation, called the \emph{order topology}.
+Given elements $a,b \in X$ with $a<b$, we have four intervals determined by $a,b$ in the usual ways; one open, two half-open, and one closed interval.
+\begin{definition}
+  Let $X$ be a simply ordered set with more than one element, and let $\SB$ be the collection of sets of the following types:
+  \begin{enumerate}[label={(\arabic*)}]
+    \item All open intervals $(a,b) \subset X$.
+    \item All intervals of the form $[a_0,b)$, where $a_0$ is the smallest element (if any) of $X$.
+    \item All intervals of the form $(a,b_0]$, where $b_0$ is the largest element (if any) of $X$.
+  \end{enumerate}
+  The collection $\SB$ is a basis for a topology on $X$, which is called the \emph{order topology}.
+\end{definition}
+Note that every element lies in a basis element, satisfying the first condition.  
+Second, the intersection of any two sets of these types is another set of these types if nonempty; hence this is a basis.
+
+Some examples are useful: this is the standard topology for $\RR$.
+This acts as expected on $\RR^2$ with dictionary order.
+This is the discrete topology on $\ZZ_+$;
+however, this is not the discrete topology on $\cbr{1,2} \times \ZZ_+$ in dictionary order, since any basis element about $2 \times 1$ must contain some $1 \times n$, so $\{2 \times 1\}$ is not open.
+
+We may also define \emph{rays} $(a,+\infty) = \cbr{x \in X \mid x > a}$, as well as defining the other open and closed rays analogously.
+Note that the open rays (non-inclusive) are open, since $(a,+\infty)$ either equals $(a,b_0]$ in the case of a largest element, or the union of all $(a,x)$ for $x > a$ otherwise (similar proof for the open ray to $-\infty$).
+In fact, the open rays are a subbasis for the order topology on $X$, since $(a,b) = (-\infty,b) \cap (a,\infty)$, and the half-open basis elements are open rays if they exist.
+
+\subsection{The Product Topology on \texorpdfstring{$X \times Y$}{XxY}}
+\begin{definition}
+  Let $X$ and $Y$ be topological spaces.
+  The \emph{product topology} on $X \times Y$ is the topology having as basis the collection $\SB$ of all sets of the form $U \times V$, where $U \subset X$ and $V \subset Y$ are open.
+\end{definition}
+
+Let's check that $\SB$ is a basis.
+The condition clearly all $x \times y$ are in a basis element, since $X \times Y$ is a basis element.
+Furthermore, if $U_i \subset X$, $V_i \subset Y$ open, 
+\[
+  (U_1 \times V_1) \cap (U_2 \times V_2)
+  = (U_1 \cap U_2) \times (V_1 \cap V_2).
+\]
+Each side of this is open, so this is a basis element, and $\SB$ is a basis.
+
+\begin{theorem}
+  If $\SB$ is a basis for the topology of $X$ and $\SC$ is a basis for the topology of $Y$, then the collection
+  \[
+    \SD = \cbr{B \times C \mid B \in \SB \text{ and } C \in \SC}
+  \]
+  is a basis for the topology of $X \times Y$.
+\end{theorem}
+\begin{proof}
+  Let $U \times V$ be an open subset of $X \times Y$ containing $x \times y$.
+  Let $B,C$ be basis elements with $x \in B \subset U$ and $y \in C \subset V$ by an earlier lemma; then $x \times y \in B \times C \subset U \times V$, and $B \times C \in \SD$, so $\SD$ is a basis.
+\end{proof}
+
+Note: we will call the \emph{standard} topology the product of two copies of the standard topology on $\RR$.
+We'll seek to find a subbasis for the product topology.
+\begin{definition}
+  Let $\pi_1:X \times Y \rightarrow X$ be defined by $(x,y) \mapsto x$, and $\pi_2:X \times Y \rightarrow Y$ be defined by $(x,y) \mapsto y$.
+  The maps $\pi_i$ are called \emph{projections} of $X \times Y$ onto it's $i$th factors.
+\end{definition}
+
+The word onto was used because $\pi_i$ are surjective assuming $X$ and $Y$ are nonempty (otherwise $X \times Y$ is empty).
+If $U$ is an open subset of $X$, then $\pi_1^{-1}(U) = U \times Y$ is open in $X \times Y$ (similarly for preimages in the second coordinate).
+
+\begin{theorem}
+  The collection
+  \[
+    \CS = \cbr{ \pi_1^{-1}(U) \mid U \text{ open in } X } \cup \cbr{ \pi_2^{-1}(V) \mid V \text{ open in } Y}
+  \]
+  is a subbasis for the product topology on $X \times Y$.
+\end{theorem}
+\begin{proof}
+  Let $\ST$ be the product topology on $X \times Y$, and let $\ST'$ be the topology generated by $\CS$ as a subbasis.
+  Every element of $\CS$ belongs to $\ST$, so finite intersections do as well, and arbitrary unions of finite intersections; $\ST' \subset \ST$.
+  Furthermore, for any $U \times V \in \ST$, $\pi_1^{-1}(U) \cap \pi_2^{-1}V = U \times V$, so $\ST \subset \ST'$.
+\end{proof}
+
+\subsection{The Subspace Topology}
+\begin{definition}
+  Let $X$ be a topological space with topology $\ST$.
+  If $Y  \subset X$, the collection
+  \[ \ST_Y = \cbr{Y \cap U \mid U \in \ST} \]
+  is a topology on $Y$, called the \emph{subspace topology}.
+  With this topology, $Y$ is a \emph{subspace} of $X$.
+\end{definition}
+
+\begin{lemma}
+  If $\SB$ is a basis for the topology of $X$ then the collection
+  \[
+    \SB_Y = \cbr{B \cap Y \mid B \in \SB}
+  \]
+  is a basis for the subspace topology on $Y$
+\end{lemma}
+\begin{proof}
+  Let $U \cap Y$ be open containing $x \times y$, and let $B \in \SB$ satisfy $x \in \SB \subset U$.
+  Then $x \times y \in B \cap Y \subset U \cap Y$, so $\SB_Y$ is a basis for the subspace topology.
+\end{proof}
+
+\begin{lemma}
+  Let $Y$ be a subspace of $X$. If $U$ is open in $Y$ and $Y$ is open in $X$, then $U$ is open in $X$.
+\end{lemma}
+
+We'll explore the relation of the subspace topology to the order and product topologies;
+this is well behaved for the product topology, but not the order topology.
+
+\begin{theorem}
+  If $A$ is a subspace of $X$ and $B$ is a subspace of $Y$, then the product topology on $A \times B$ is the same as the topology $A \times B$ inherits as a subspace of $X \times Y$.
+\end{theorem}
+\begin{proof}
+  The general basis element for the subspace topology on $A \times B$ is $(U \times V) \cap (A \times B)$.
+  Since
+  \[
+    (U \times V) \cap (A \times B) = (U \cap A) \times (V \cap B),  
+  \]
+  the bases for the subspace and product topologies are the same, and hence taking subspace and product topologies commutes.
+\end{proof}
+
+Note that this property with commuting doesn't hold for the order topology. 
+An example is $Y = [0,1) \cap \{2\} \subset \RR$. 
+In the subspace topology, $\{2\}$ is open, but in the order topology, any basis element containing $2$ must also contain some other elements of $Y$, so $\{2\}$ is not open with respect to the order topology.
+
+Given an ordered set $X$, we'll say that a subset $Y$ of $X$ is \emph{convex} in $X$ if for each pair of points $a<b$ in $Y$, the interval $(a,b)$ of points in $X$ lies in $Y$; this includes intervals and rays in any $X$.
+
+\begin{theorem}
+  Let $X$ be an ordered set in the order topology; let $Y$ be a convex subset of $X$.
+  Then the order topology on $Y$ is the same as the topology $Y$ inherits as a subspace of $X$.
+\end{theorem}
+\begin{proof}
+  I'll go with a sketch, since the proof is a bit tedious.
+  An open ray in $X$ intersected with $Y$ is an open ray in $Y$, and any open ray of $Y$ is the intersection of open rays in $X$.
+  Since the open rays are a subbasis of the order topology, one can pull each direction of an inclusion from this.
+\end{proof}
+
+For clarity, we always assume subsets are given the subspace topology unless specified otherwise.
+
 \end{document}
