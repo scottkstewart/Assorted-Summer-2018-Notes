@@ -233,6 +233,100 @@ We'll write that a set $A$ \emph{intersects} a set $B$ if the intersection $A \c
 
 We'll write ``$U$ is an open set containing $x$'' as ``$U$ is a \emph{neighborhood} of $x$.''
 Using this, we can rewrite the previous theorem as ``if $A$ is a subset of a topological space $X$, then $x \in \bar{A}$ iff every neighborhood of $X$ intersects $A$.''
+
+\subsection{Limit Points}
+We seek another way of describing closures.
+\begin{definition}
+  If $A$ is a subset of a topological space $X$, and $x$ is a point of $x$, we call $x$ a \emph{limit point} (or cluster point, point of accumulation) if every neighborhood of $x$ intersects $A$ in some point other than $x$ itself.
+  In other words, $x$ is a limit point of $A$ if it belongs to the closure of $A - \cbr{x}$.
+\end{definition}
+
+\begin{theorem}
+  Let $A$ be a subset of the topological space $X$ and let $A'$ be the set of all limit points of $A$. Then
+  \[
+    \bar A = A \cup A'.
+  \]
+\end{theorem}
+\begin{proof}
+  If $x \in A'$, every neighborhood of $x$ intersects $A$, so $A' \subset \bar A$.
+  Furthermore, by definition, $A \subset \bar A$, so $A \cup A' \subset \bar A$.
+
+  Let $x \in \bar A$; if $x \in A$ then $x \in A \cup A'$ trivially.
+  Otherwise, every neighborhood of $x$ intersects $A$ at a point other than $x$, meaning $x \in A'$ so $x \in A \cup A'$ as desired.
+\end{proof}
+\begin{corollary}
+  A subset of a topological space is closed iff it contains its limit points.\qed
+\end{corollary}
+
+\subsection{Hausdorff Spaces}
+Note: not all topological spaces have closed one-point sets, and not all convergent sequences in general topological spaces converge to a unique point.
+Examples of this come from the topology on $\cbr{a,b,c}$ indicated in figure 17.3 of Munkres.
+We get rid of these with an extra axiom:
+\begin{definition}
+  A topological space $X$ is classed a \emph{Hausdorff space} if, for each pair $x_1,x_2$ of distinct points of $X$, there exist neighborhoods $U_1$ and $U_2$ of $x_1$ and $x_2$ which are disjoint.
+\end{definition}
+
+\begin{theorem}
+  Every finite point set in a Hausdorff space is closed.
+\end{theorem}
+\begin{proof}
+  It's sufficient to show that one-point sets are closed.
+  Consider the one point set $\cbr{x_1}$ and any other element $x_2 \in X$.
+  By definition, there is a neighborhood $U_2$ of $x_2$ which is disjoint from a neighborhood of $x_1$, which must contain $x_1$, i.e. $x_1 \notin U_2$; then $x_2$ isn't a limit point of $\cbr{x_1}$, so it is closed.
+  Finite unions of closed one-point sets give the theorem.
+\end{proof}
+
+In fact, that finite-point sets are closed is weaker than the Hausdorff condition; we call this the \emph{$T_1$ axiom}.
+In particular, $\RR$ with the finite complement topology is not a Hausdorff space, but it satisfies the $T_1$ axiom by construction.
+We won't use the $T_1$ axiom very much, but it's important now:
+
+\begin{theorem}
+  Let $X$ be a space satisfying the $T_1$ axiom and let $A \subset X$.
+  Then $x$ is a limit point of $A$ iff every neighborhood of $x$ contains infinitely many points of $A$.
+\end{theorem}
+\begin{proof}
+  If every neighborhood of $x$ intersects $A$ at infinitely many points then $x$ is clearly a limit point of $A$.
+
+  Suppose that $x \in X$ and suppose some neighborhood $U$ of $x$ intersects $A$ in finitely many points.
+  Let $U \cap (A - \{x\}) = \cbr{x_1,\dots,x_n}$;
+  then $X - \cbr{x_1 \dots x_n}$ is an open set of $X$ and
+  \[ U \cap (X - \cbr{x_1,\dots,x_n})\]
+  is a neighborhood of $x$ which doesn't intersect $A$.
+  Hence $x$ is not a limit point of $A$ and the theorem follows.
+\end{proof}
+
+\begin{theorem}
+  Let $x_n$ be a sequence of points in a Hausdorff space $X$ which converges; then $x_n$ converges to one point.
+\end{theorem}
+\begin{proof}
+  Suppose $x_n \rightarrow x$ and $y \neq x$.
+  Let $U$ and $V$ be disjoint neighborhoods of $x$ and $y$; then all but finitely many points of $x_n$ fall within $U$, so the same can't be true of $V$, and $x_n$ doesn't converge to $y$.
+\end{proof}
+
+\begin{theorem}
+  The following examples are true:
+  \begin{enumerate}[label={(\alph*)}]
+    \item Every simply ordered set is a Hausdorff space in the order topology.
+    \item The product of two Hausdorff spaces is a Hausdorff space.
+    \item A subspace of a Hausdorff space is a Hausdorff space.
+ \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Suppose $X$ is simply ordered with the order topology and $x,y \in X$.
+  Without loss of generality, assume $x < y$; if there is an intermediate element $x < c < y$ then choose $(-\infty,c)$ and $(c,\infty)$ for disjoint neighborhoods; if no such element exists, then $(-\infty,y)$ and $(x,\infty)$ are disjoint open neighborhoods of $x$ and $y$ and the order topology is Hausdorff.
+
+  Suppose $X$ and $Y$ are Hausdorff spaces and consider the product topology on $X \times Y$.
+  Take any $x \times y , x' \times y' \in X \times Y$ distinct and neighborhoods $U,V,U',V'$ around those points with $U,U'$ if $x \neq x'$ and $V,V'$ disjoint if $y \neq y'$ (at least one of these is true).
+  Then, $U \times V$ and $U' \times V'$ are disjoint neighborhoods of the points and the product topology is Hausdorff.
+
+  Suppose $Y$ is a subspace of a Hausdorff space $X$, and suppose $x,y \in A$.
+  Let $U,V$ be disjoint neighborhoods of $x,y$ in $X$;
+  then $U \cap Y$ and $V \cap Y$ are disjoint neighborhoods of $x,y$ in $Y$ and the subspace topology is Hausdorff.
+\end{proof}
+
+\section{Continuous Functions}
+\subsection{Continuity of a Function}
+
 \section{Basic Examples of Topological Spaces}
 \subsection{The Order Topology}
 If $X$ is a set with a simple order $<$, we can define a standard topology for $X$ using the order relation, called the \emph{order topology}.
